@@ -1,0 +1,5 @@
+# Core runtime (versions are lower bounds; verify with your Python via `pip install -r requirements.txt`)
+streamlit>=1.40,<2
+pandas>=2.0,<4
+requests>=2.31,<3
+python-dotenv>=1.0,<2

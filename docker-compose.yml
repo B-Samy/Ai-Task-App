@@ -1,0 +1,16 @@
+# No database service: all data lives in ./data (mounted volume).
+services:
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:8501:8501"          # bound to localhost only; the app has no login
+    volumes:
+      - ./data:/app/data
+    environment:
+      # Inside a container "localhost" is the container itself. Reach Ollama on the Windows host via:
+      OLLAMA_URL: "http://host.docker.internal:11434"
+    env_file:
+      - path: .env                     # optional hosted-API key (LLM_API_KEY); ignored if the file is absent
+        required: false
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
