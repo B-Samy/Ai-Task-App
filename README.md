@@ -1,5 +1,7 @@
 # AI Task Intelligence System
 
+https://taskate.streamlit.app/
+
 A local, single-user planner that turns a natural-language goal into milestones and tasks, builds a **deterministic**
 schedule around your availability, tracks progress and habits, and **reschedules** when you fall behind.
 Streamlit UI · local **JSON files only** (no database) · Ollama/Llama as the primary LLM · optional hosted API.
