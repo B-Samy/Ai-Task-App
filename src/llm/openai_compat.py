@@ -39,10 +39,11 @@ class OpenAICompatProvider(LLMProvider):
         if r.status_code >= 400:
             return ProviderStatus(False, self.name, self.model, f"Provider returned HTTP {r.status_code}.")
         try:
-            ids = [m.get("id") for m in r.json().get("data", [])]
+            # Gemini prefixes model ids with "models/", so strip it before comparing.
+            ids = [(m.get("id") or "").removeprefix("models/") for m in r.json().get("data", [])]
         except ValueError:
             ids = []
-        if ids and self.model not in ids:
+        if ids and self.model.removeprefix("models/") not in ids:
             return ProviderStatus(False, self.name, self.model, f"Model '{self.model}' is not listed by the provider.")
         return ProviderStatus(True, self.name, self.model, "Connected.")
 
