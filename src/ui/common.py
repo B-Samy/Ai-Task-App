@@ -6,6 +6,15 @@ import os
 import sys
 from datetime import date
 from pathlib import Path
+import streamlit as st 
+
+try:
+    for _k in ("LLM_API_KEY", "GROQ_API_KEY"):
+        if _k in st.secrets and not os.environ.get(_k):
+            os.environ[_k] = str(st.secrets[_k])
+except Exception:
+    pass
+
 
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
